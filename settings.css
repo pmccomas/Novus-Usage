@@ -1,0 +1,16 @@
+﻿#newUpdate {
+  margin-top: 10px;
+  display: none;
+  padding: 5px;
+  width:280px;
+  background-color: #ffb2b2;
+  border: 1px solid #cc0000;
+}
+#noUpdate {
+  margin-top: 10px;
+  display: none;
+  padding: 5px;
+  width:280px;
+  background-color: #bfffb2;
+  border: 1px solid #158000;
+}

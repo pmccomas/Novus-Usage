@@ -1,0 +1,63 @@
+﻿<!--//
+////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright © 2009 addgadget.com  All rights reserved.
+//
+//  http://addgadget.com/
+//
+////////////////////////////////////////////////////////////////////////////////
+//-->
+<html xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+	<title>All CPU Meter</title>
+	<link href="gadget.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" language="javascript" src="gadget.js"></script>
+
+<style>
+v\:* { behavior: url(#default#VML); }
+</style>
+</head>
+<body onload="onLoad()" onunload="onUnload()">
+	<div ondblclick="runTaskManager();"  >
+		<g:background id="background" src="black_back.png" style="width:130;height:94;"/>
+
+		<img src="barback.png" style="position:absolute;top:24px; left:83px; width:40px;"/>
+        <div id="downBar" style="position:absolute;overflow:hidden; width:25px; height:12px; top:18px; left:83px;">
+			<img src="barblue.png" />
+		</div>
+
+		<img src="barback.png" style="position:absolute;top:34px; left:83px; width:40px;"/>
+        <div id="upBar" style="position:absolute;overflow:hidden; width:25px; height:12px; top:28px; left:83px;">
+			<img src="bargreen.png" />
+		</div>
+
+		<div id="downUsed" style="position:absolute;font-size:9; top:20px; left:20px; color:yellow; "></div>
+        <div id="downPercent" style="position:absolute;font-size:9; top:20px; left:55px; width:120px; color:yellow; "></div>
+        <img src="arrow_down_yellow.png" style="position:absolute;top:18px; left:7px;"/>
+		<div id="upUsed" style="position:absolute;font-size:9; top:30px; left:20px; color:#90EE90; "></div>
+        <div id="upPercent" style="position:absolute;font-size:9; top:30px; left:55px; width:120px; color:#90EE90; "></div>
+        <img src="arrow_up_green.png" style="position:absolute;top:28px; left:7px;"/>
+        
+		<div style="position:absolute;font-size:9; top:40px; left:10px; color:#90EE90; ">GB / Day Left:</div>
+		<img src="arrow_down_yellow.png" style="position:absolute;top:48px; left:7px;"/>
+        <div id="downPerDay" style="position:absolute;font-size:9; top:50px; left:21px; width:120px; color:yellow; "></div>
+        <img src="arrow_up_green.png" style="position:absolute;top:48px; left:61px;"/>
+        <div id="upPerDay" style="position:absolute;font-size:9; top:50px; left:75px; width:120px; color:#90EE90; "></div>
+
+		<div style="position:absolute;font-size:9; top:60px; left:10px; color:yellow; ">Download Quota:</div>
+        <div id="downQuota" style="position:absolute;font-size:9; top:60px; left:0px; width:120px; text-align:right; color:yellow; "></div>
+
+		<img src="barback.png" style="position:absolute;top:74px; left:9px; width:112px;"/>
+        <div id="downQuotaBar" style="position:absolute;overflow:hidden; top:74px; left:9px; width:112px; ">
+			<img src="barquota.png" style="width:112px"/>
+		</div>
+
+
+        <div id="usgTotal" style="position:absolute; font-size:11; top:6px; left:0px; width:120px; color:White; text-align:right; font-weight:bold;"></div>
+        <div id="tmpTotal" style="position:absolute; font-size:11; top:6px; left:10px; color:White; font-weight:bold;"></div>
+
+		<div style="position:absolute;font-size:9; top:70px; left:9px; color:#87CEFA; " id="loading">Connecting...</div>
+		<div style="position:absolute;font-size:9; top:80px; left:9px; color:#87CEFA; " id="error">error</div>
+	</div>
+</body>
+</html>

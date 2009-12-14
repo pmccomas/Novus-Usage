@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<gadget>
+	<name>Novus Usage</name>
+	<namespace></namespace>
+	<version>1.2</version>
+	<author name="Paul McComas">
+		<info url="" />
+		<logo src="icon.png" />
+	</author>
+	<copyright>© 2009 by Paul McComas</copyright>
+	<description>Shows bandwidth usage for Novus ISP</description>
+	<icons>
+		<icon height="100" width="100" src="icon.png" />
+	</icons>
+	<hosts>
+		<host name="sidebar">
+			<base type="HTML" apiVersion="1.0.0.0" src="gadget.html" />
+			<permissions>Full</permissions>
+			<platform minPlatformVersion="1.0"/>
+			<defaultImage src="icon.png" />
+		</host>
+	</hosts>
+</gadget>
