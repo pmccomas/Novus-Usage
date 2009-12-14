@@ -79,7 +79,7 @@ function getUsageHtml()
 					error.innerText = "Service not available";
 					error.style.visibility = "visible";
 
-					chkConn = setInterval(getUsageHtml, 30 * 1000);
+					chkConn = setInterval(getUsageHtml, 30 * 60000);
 				}
 			}
 			else
