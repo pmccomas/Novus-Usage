@@ -179,19 +179,21 @@ function refreshdisplay()
     upUsed.innerText = uploadUsed.toFixed(1) + "GB";
     
 	var today = new Date();
-	var now = today.getDate();
-	var year = today.getYear();
+	var hour = today.getHours();
+	var dateFromZero = today.getDate() - 1;
 	var month = today.getMonth();
+	var year = today.getYear();
 	var daysTotal = daysInMonth(month, year); 
-	var daysLeft = daysTotal - now;
+	var date = dateFromZero + hour / 24;
+	var daysLeft = daysTotal - date;
 	
-	var downloadPerDay = daysLeft == 0 ? downloadRemaining : downloadRemaining / daysLeft;
+	var downloadPerDay = daysLeft < 1 ? downloadRemaining : downloadRemaining / daysLeft;
 	downPerDay.innerText = downloadPerDay.toFixed(2) + "GB";
 
-	var uploadPerDay = daysLeft == 0 ? uploadRemaining : uploadRemaining / daysLeft;
+	var uploadPerDay = daysLeft < 1 ? uploadRemaining : uploadRemaining / daysLeft;
 	upPerDay.innerText = uploadPerDay.toFixed(2) + "GB";
 	
-	var idealDownloadUsed = downloadLimit / daysTotal * now;
+	var idealDownloadUsed = downloadLimit / daysTotal * date;
 	var downloadQuota = downloadUsed / idealDownloadUsed;
 	downQuota.innerText = downloadQuota.toFixed(2);
 	
