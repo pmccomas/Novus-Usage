@@ -194,14 +194,23 @@ function refreshdisplay()
 	upPerDay.innerText = uploadPerDay.toFixed(2) + "GB";
 	
 	var idealDownloadUsed = downloadLimit / daysTotal * date;
-	var downloadQuota = downloadUsed / idealDownloadUsed;
-	downQuota.innerText = downloadQuota.toFixed(2);
+	var downloadQuota = idealDownloadUsed - downloadUsed;
+	var downloadQuotaRatio = downloadUsed / idealDownloadUsed;
+	downQuota.innerHTML = downloadQuotaRatio.toFixed(2) + " / ";
+	if( downloadQuota < 0 )
+	{
+		downQuota.innerHTML += "<span style=\"color:red\">" + downloadQuota.toFixed(2) + "GB</span>";
+	}
+	else
+	{
+		downQuota.innerHTML += "<span style=\"color:#00ff00\">+" + downloadQuota.toFixed(2) + "GB</span>";
+	}
 	
 	try
     {
         upBar.style.width = parseInt( 0.4 * uploadUsedPercent );
         downBar.style.width = parseInt( 0.4 * downloadUsedPercent );
-        downQuotaBar.style.width = parseInt( 112 * 0.5 * downloadQuota );
+        downQuotaBar.style.width = parseInt( 112 * 0.5 * downloadQuotaRatio );
 	}
 	catch (ex)
 	{
