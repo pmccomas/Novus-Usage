@@ -54,7 +54,9 @@ function getUsageHtml()
     	
 	    loading.innerText = "Connecting...";					
 		rssObj = new ActiveXObject("Msxml2.XMLHTTP");
-		rssObj.open("GET", "https://internet.mynovus.ca/usagemanagement.php", true, userName, userPassword);
+		var usageurl = "https://internet.mynovus.ca/usagemanagement.php";
+		usageurl += '?d=' + (new Date()).getTime(); // prevent caching
+		rssObj.open("GET", usageurl, true, userName, userPassword);
 		
 		rssObj.onreadystatechange = function()
 		{
@@ -226,7 +228,7 @@ function refreshdisplay()
 	else
 		upQuota.innerHTML += uploadQuota.toFixed(2) + "GB</span>";
 
-	// convert from GB/ms to KB/s
+	// convert from GB/ms to KB/s	
 	var downloadSpeed = (downloadUsedDelta * 1024 * 1024) / (parseTimeDelta / 1000.0);
 	downSpeed.innerHTML = downloadSpeed.toFixed(1) + "KB/s";
 	var uploadSpeed = (uploadUsedDelta * 1024 * 1024) / (parseTimeDelta / 1000.0);
