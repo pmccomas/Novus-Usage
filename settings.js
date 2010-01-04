@@ -32,12 +32,12 @@ function initSettings()
 
 function loadSettings()
 {
-    userName.value = System.Gadget.Settings.read("userName");
-    userPassword.value = System.Gadget.Settings.read("userPassword");
+    userName.value = System.Gadget.Settings.readString("userName");
+    userPassword.value = System.Gadget.Settings.readString("userPassword");
 }
 
 function saveSettings()
 {
-    System.Gadget.Settings.write("userName", userName.value);
-    System.Gadget.Settings.write("userPassword", userPassword.value);
+    System.Gadget.Settings.writeString("userName", userName.value);
+    System.Gadget.Settings.writeString("userPassword", userPassword.value);
 }
