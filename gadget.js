@@ -14,9 +14,13 @@ var timeout;
 var userName;
 var userPassword;
 
+var parseTime = 0;
+var parseTimeDelta = 0;
 var downloadUsed = 0;
+var downloadUsedDelta = 0;
 var downloadLimit = 0;
 var uploadUsed = 0;
+var uploadUsedDelta = 0;
 var uploadLimit = 0;
  
 function onLoad()
@@ -148,10 +152,21 @@ function parseHtml()
 	    }
 	}
 	
+	var d = new Date();
+	var curTime = d.getTime();	
+	parseTimeDelta = curTime - parseTime;
+	parseTime = curTime;	
+	
+    var curDownloadUsed = parseSize( downloadUsedTxt );
+	downloadUsedDelta = curDownloadUsed - downloadUsed;
+	downloadUsed = curDownloadUsed;
+	
+    var curUploadUsed = parseSize( uploadUsedTxt );
+	uploadUsedDelta = curUploadUsed - uploadUsed;
+	uploadUsed = curUploadUsed;
+	
     downloadLimit = parseSize( downloadLimitTxt );
-    downloadUsed = parseSize( downloadUsedTxt );
     uploadLimit = parseSize( uploadLimitTxt );
-    uploadUsed = parseSize( uploadUsedTxt );
 }
 
 function daysInMonth(iMonth, iYear)
@@ -163,7 +178,7 @@ function refreshdisplay()
 {
 	background.src = "black_back_4.png";
 	    
-    tmpTotal.innerText = "Bandwidth Usage"; 
+    title.innerText = "Bandwidth Usage"; 
 //    usgTotal.innerText = totalUsage + "%";
 
 	var uploadUsedPercent = parseInt(Math.round(uploadUsed / uploadLimit * 100))
@@ -198,19 +213,31 @@ function refreshdisplay()
 	var downloadQuotaRatio = downloadUsed / idealDownloadUsed;
 	downQuota.innerHTML = downloadQuotaRatio.toFixed(2) + " / ";
 	if( downloadQuota < 0 )
-	{
 		downQuota.innerHTML += "<span style=\"color:red\">" + downloadQuota.toFixed(2) + "GB</span>";
-	}
 	else
-	{
-		downQuota.innerHTML += "<span style=\"color:#00ff00\">+" + downloadQuota.toFixed(2) + "GB</span>";
-	}
+		downQuota.innerHTML += downloadQuota.toFixed(2) + "GB</span>";
+
+	var idealUploadUsed = uploadLimit / daysTotal * date;
+	var uploadQuota = idealUploadUsed - uploadUsed;
+	var uploadQuotaRatio = uploadUsed / idealUploadUsed;
+	upQuota.innerHTML = uploadQuotaRatio.toFixed(2) + " / ";
+	if( uploadQuota < 0 )
+		upQuota.innerHTML += "<span style=\"color:red\">" + uploadQuota.toFixed(2) + "GB</span>";
+	else
+		upQuota.innerHTML += uploadQuota.toFixed(2) + "GB</span>";
+
+	// convert from GB/ms to KB/s
+	var downloadSpeed = (downloadUsedDelta * 1024 * 1024) / (parseTimeDelta / 1000.0);
+	downSpeed.innerHTML = downloadSpeed.toFixed(1) + "KB/s";
+	var uploadSpeed = (uploadUsedDelta * 1024 * 1024) / (parseTimeDelta / 1000.0);
+	upSpeed.innerHTML = uploadSpeed.toFixed(1) + "KB/s";
+
 	
 	try
     {
         upBar.style.width = parseInt( 0.4 * uploadUsedPercent );
         downBar.style.width = parseInt( 0.4 * downloadUsedPercent );
-        downQuotaBar.style.width = parseInt( 112 * 0.5 * downloadQuotaRatio );
+        //downQuotaBar.style.width = parseInt( 112 * 0.5 * downloadQuotaRatio );
 	}
 	catch (ex)
 	{
